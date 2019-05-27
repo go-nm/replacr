@@ -77,9 +77,7 @@ func updateFile(filePath string) (err error) {
 
 	dirname, filename := path.Split(filePath)
 	filename = strings.Replace(filename, ".tmpl", "", 1)
-	ioutil.WriteFile(path.Join(dirname, filename), []byte(fileContent), stats.Mode())
-
-	return
+	return ioutil.WriteFile(path.Join(dirname, filename), []byte(fileContent), stats.Mode())
 }
 
 func main() {
@@ -88,7 +86,7 @@ func main() {
 	// TODO allow config overrides for these
 	dirMatcher := "."
 	fileMatcher := ".tmpl"
-	matcher, err = regexp.Compile("\\$\\{?([a-zA-Z_.]+)\\}?")
+	matcher, err = regexp.Compile(`\$\{?([a-zA-Z_.]+)\}?`)
 	if err != nil {
 		panic(err)
 	}
