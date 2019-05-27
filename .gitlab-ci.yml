@@ -1,0 +1,11 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: registry.gitlab.com/go-nm/docker/gobuild
+  script:
+    - /entrypoint.sh
+  artifacts:
+    paths:
+      - bin/
