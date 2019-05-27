@@ -64,7 +64,7 @@ func updateFile(filePath string) (err error) {
 	uniqueMatches := map[string]string{}
 	matches := matcher.FindAllStringSubmatch(fileContent, -1)
 	for _, match := range matches {
-		uniqueMatches[match[0]] = strings.Replace(match[1], "_", ".", -1)
+		uniqueMatches[match[0]] = strings.Replace(match[1], ".", "_", -1)
 	}
 
 	for replace, replaceVar := range uniqueMatches {
@@ -73,7 +73,7 @@ func updateFile(filePath string) (err error) {
 		    newValue = os.Getenv(replaceVar)
 		}
 		if newValue == "" {
-			fmt.Printf("[WARN] Variable %s has not been set!\n", strings.Replace(replaceVar, ".", "_", -1))
+			fmt.Printf("[WARN] Variable %s has not been set!\n", replaceVar)
 		}
 		fileContent = strings.Replace(fileContent, replace, newValue, -1)
 	}
