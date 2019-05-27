@@ -4,7 +4,7 @@ stages:
 
 check:
   stage: test
-  image: registry.gitlab.com/docker-base/go/gocheck
+  image: registry.gitlab.com/go-nm/docker/gocheck
   variables:
     APP_ENV: test
   script:
@@ -12,7 +12,7 @@ check:
 
 uint test:
   stage: test
-  image: registry.gitlab.com/docker-base/go/gotest
+  image: registry.gitlab.com/go-nm/docker/gotest
   variables:
     APP_ENV: test
   script:
