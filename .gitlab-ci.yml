@@ -1,5 +1,22 @@
 stages:
+  - test
   - build
+
+check:
+  stage: test
+  image: registry.tyvoid.net/docker-base/go/gocheck
+  variables:
+    APP_ENV: test
+  script:
+    - /entrypoint.sh
+
+uint test:
+  stage: test
+  image: registry.tyvoid.net/docker-base/go/gotest
+  variables:
+    APP_ENV: test
+  script:
+    - /entrypoint.sh
 
 build:
   stage: build
