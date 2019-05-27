@@ -68,7 +68,10 @@ func updateFile(filePath string) (err error) {
 	}
 
 	for replace, replaceVar := range uniqueMatches {
-		newValue := viper.GetString(replaceVar)
+		var newValue := viper.GetString(replaceVar)
+		if newValue == "" && os.Getenv(replaceVar) != "" {
+		    newValue = os.Getenv(replaceVar)
+		}
 		if newValue == "" {
 			fmt.Printf("[WARN] Variable %s has not been set!\n", strings.Replace(replaceVar, ".", "_", -1))
 		}
